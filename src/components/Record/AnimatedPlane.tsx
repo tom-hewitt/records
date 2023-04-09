@@ -61,7 +61,10 @@ export const AnimatedPlane: React.FC<
     >
       <motion.div
         ref={ref}
-        whileHover={{ scale: disabled ? 1 : 1.05, y: disabled ? -10 : 20 }}
+        whileHover={{
+          scale: disabled ? 1 : 1.05,
+          y: disabled ? -height / 50 : height / 25,
+        }}
         whileTap={{ scale: 1 }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseEnd}

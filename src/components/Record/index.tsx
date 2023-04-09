@@ -1,30 +1,29 @@
+import Image from "next/image";
 import { AnimatedPlane } from "./AnimatedPlane";
 import { CursorHighlight } from "./CursorHighlight";
 import { Label } from "./Label";
-
-export interface RecordInfo {
-  album: string;
-  artist: string;
-  price: string;
-  cover: string;
-}
+import { RecordInfo } from "@/data";
 
 export const Record: React.FC<{
   info: RecordInfo;
   size: number;
-  primary: boolean;
-}> = ({ info, size, primary }) => {
+  primary?: boolean;
+  label?: boolean;
+}> = ({ info, size, primary, label }) => {
   return (
     <AnimatedPlane width={size} height={size} disabled={!primary}>
       <CursorHighlight
         highlightWidth={size}
         highlightHeight={size}
-        overlay={<Label {...info} />}
+        overlay={label ? <Label {...info} /> : undefined}
       >
-        <img
+        <Image
           src={info.cover}
-          style={{ height: "100%", width: "100%" }}
+          width={size}
+          height={size}
+          alt={`Cover art for ${info.album} by ${info.artist}`}
           draggable="false"
+          priority
         />
       </CursorHighlight>
     </AnimatedPlane>
